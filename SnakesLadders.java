@@ -57,7 +57,10 @@ public class SnakesLadders {
 //    @return: void
     public void playerMove(){
         int val=random.nextInt(2);
-        if(val==0){
+        if(!checkMove(val)){
+            System.out.println("Invalid Dice Roll");
+        }
+        else if(val==0){
             System.out.println("Player Decided not to move");
         }
         else{
@@ -77,4 +80,15 @@ public class SnakesLadders {
             System.out.println("Position = "+this.position);
         }
     }
+
+//    @desc: check feasibility for movement
+//    @params: dice val(int)
+//    @return: boolean
+    public boolean checkMove(int dice){
+        if(this.position + dice >100 || this.position<0){
+            return false;
+        }
+        return true;
+    }
+    
 }
