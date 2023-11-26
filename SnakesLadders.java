@@ -21,10 +21,10 @@ public class SnakesLadders {
         for (int i = 0; i < cnt ; i++){
             int v1 = random.nextInt(100)+1;
             int v2 = random.nextInt(100)+1;
-            if(v1>v2){
+            if(v1>v2 && v1!=100){
                 snakes.put(v1,v2);
             }
-            else{
+            else if(v2>v1 && v2!=100){
                 snakes.put(v2,v1);
             }
         }
@@ -57,14 +57,15 @@ public class SnakesLadders {
 //    @return: void
     public void playerMove(){
         int val=random.nextInt(2);
-        if(!checkMove(val)){
-            System.out.println("Invalid Dice Roll");
-        }
-        else if(val==0){
+        if(val==0){
             System.out.println("Player Decided not to move");
         }
         else{
             int dice = rollDice();
+            if(!checkMove(dice)){
+                System.out.println("Invalid Dice Roll");
+                return;
+            }
             position = position + dice;
             if(snakes.containsKey(position)){
                 System.out.print("Snake: ");
@@ -90,5 +91,15 @@ public class SnakesLadders {
         }
         return true;
     }
-    
+
+    public static void main(String[] args){
+        System.out.println("Welcome to Snakes and Ladders Game");
+        SnakesLadders player1 = new SnakesLadders();
+        player1.setLadders(15);
+        player1.setSnakes(15);
+        while(player1.position!=100){
+            player1.playerMove();
+        }
+        System.out.println("Player 1 Wins");
+    }
 }
