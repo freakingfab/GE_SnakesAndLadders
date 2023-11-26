@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class SnakesLadders {
     private int position;
+    private int diceCount;
     Map<Integer, Integer> snakes = new HashMap<>();
     Map<Integer, Integer> ladders = new HashMap<>();
 
@@ -13,6 +14,7 @@ public class SnakesLadders {
 //    @desc: constructor for initialising positions
     public SnakesLadders(){
         this.position=0;
+        this.diceCount=0;
     }
 
 //    @desc: generate snakes
@@ -57,6 +59,7 @@ public class SnakesLadders {
 //    @return: void
     public void playerMove(){
         int val=random.nextInt(2);
+        diceCount= diceCount + 1;
         if(val==0){
             System.out.println("Player Decided not to move");
         }
@@ -100,6 +103,6 @@ public class SnakesLadders {
         while(player1.position!=100){
             player1.playerMove();
         }
-        System.out.println("Player 1 Wins");
+        System.out.println("Player 1 Wins with " + player1.diceCount + " rolls");
     }
 }
