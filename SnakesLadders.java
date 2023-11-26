@@ -44,4 +44,13 @@ public class SnakesLadders {
             }
         }
     }
+
+//    @desc: provide roll dice
+//    @params: none
+//    @return: int
+    public int rollDice(){
+        return random.nextInt(6)+1;
+    }
+
+    
 }
