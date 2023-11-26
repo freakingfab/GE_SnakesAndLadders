@@ -1,20 +1,23 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Random;
 
 public class SnakesLadders {
     private int position;
     private int diceCount;
+    private int playerNo;
     Map<Integer, Integer> snakes = new HashMap<>();
     Map<Integer, Integer> ladders = new HashMap<>();
 
     Random random = new Random();
 
 //    @desc: constructor for initialising positions
-    public SnakesLadders(){
+//    @params: player number
+//    @return: none
+    public SnakesLadders(int val){
         this.position=0;
         this.diceCount=0;
+        this.playerNo=val;
     }
 
 //    @desc: generate snakes
@@ -61,25 +64,25 @@ public class SnakesLadders {
         int val=random.nextInt(2);
         diceCount= diceCount + 1;
         if(val==0){
-            System.out.println("Player Decided not to move");
+            System.out.println("Player " + this.playerNo +  ": Decided not to move");
         }
         else{
             int dice = rollDice();
             if(!checkMove(dice)){
-                System.out.println("Invalid Dice Roll");
+                System.out.println("Player " + this.playerNo +  ": Invalid Dice Roll");
                 return;
             }
             position = position + dice;
             if(snakes.containsKey(position)){
-                System.out.print("Snake: ");
+                System.out.print("Player " + this.playerNo +  ": Snake: ");
                 position = snakes.get(position);
             }
             else if(ladders.containsKey(position)){
-                System.out.print("Ladder: ");
+                System.out.print("Player " + this.playerNo +  ": Ladder: ");
                 position = ladders.get(position);
             }
             else{
-                System.out.print("Normal: ");
+                System.out.print("Player " + this.playerNo +  ": Normal: ");
             }
             System.out.println("Position = "+this.position);
         }
@@ -97,12 +100,30 @@ public class SnakesLadders {
 
     public static void main(String[] args){
         System.out.println("Welcome to Snakes and Ladders Game");
-        SnakesLadders player1 = new SnakesLadders();
+
+        SnakesLadders player1 = new SnakesLadders(1);
         player1.setLadders(15);
         player1.setSnakes(15);
-        while(player1.position!=100){
+
+        SnakesLadders player2 = new SnakesLadders(2);
+        player2.snakes=player1.snakes;
+        player2.ladders=player1.ladders;
+
+        while(player1.position!=100 && player2.position!=100){
             player1.playerMove();
+            if(player1.position==100){
+                break;
+            }
+            player2.playerMove();
         }
-        System.out.println("Player 1 Wins with " + player1.diceCount + " rolls");
+        if(player1.position==100){
+            System.out.println("Player 1 Wins");
+        }
+        else{
+            System.out.println("Player 2 Wins");
+        }
+
+        System.out.println("Player 1 Dice Count: "+ player1.diceCount);
+        System.out.println("Player 2 Dice Count: "+ player2.diceCount);
     }
 }
