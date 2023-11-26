@@ -52,5 +52,29 @@ public class SnakesLadders {
         return random.nextInt(6)+1;
     }
 
-    
+//    @desc: player moves or not
+//    @params: none
+//    @return: void
+    public void playerMove(){
+        int val=random.nextInt(2);
+        if(val==0){
+            System.out.println("Player Decided not to move");
+        }
+        else{
+            int dice = rollDice();
+            position = position + dice;
+            if(snakes.containsKey(position)){
+                System.out.print("Snake: ");
+                position = snakes.get(position);
+            }
+            else if(ladders.containsKey(position)){
+                System.out.print("Ladder: ");
+                position = ladders.get(position);
+            }
+            else{
+                System.out.print("Normal: ");
+            }
+            System.out.println("Position = "+this.position);
+        }
+    }
 }
