@@ -1,3 +1,5 @@
+package com.bridgelabz.snakesandladders;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -18,6 +20,18 @@ public class SnakesLadders {
         this.position=0;
         this.diceCount=0;
         this.playerNo=val;
+    }
+
+    /*
+    @desc: getter for the variables
+    @params: none
+    @return int
+     */
+    public int getPosition(){
+        return position;
+    }
+    public int getDiceCount(){
+        return diceCount;
     }
 
 //    @desc: generate snakes
@@ -98,32 +112,5 @@ public class SnakesLadders {
         return true;
     }
 
-    public static void main(String[] args){
-        System.out.println("Welcome to Snakes and Ladders Game");
 
-        SnakesLadders player1 = new SnakesLadders(1);
-        player1.setLadders(15);
-        player1.setSnakes(15);
-
-        SnakesLadders player2 = new SnakesLadders(2);
-        player2.snakes=player1.snakes;
-        player2.ladders=player1.ladders;
-
-        while(player1.position!=100 && player2.position!=100){
-            player1.playerMove();
-            if(player1.position==100){
-                break;
-            }
-            player2.playerMove();
-        }
-        if(player1.position==100){
-            System.out.println("Player 1 Wins");
-        }
-        else{
-            System.out.println("Player 2 Wins");
-        }
-
-        System.out.println("Player 1 Dice Count: "+ player1.diceCount);
-        System.out.println("Player 2 Dice Count: "+ player2.diceCount);
-    }
 }
